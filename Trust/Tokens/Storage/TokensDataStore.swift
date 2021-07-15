@@ -143,9 +143,9 @@ class TokensDataStore {
                     tokenObject.balance = self.getBalance(for: tokenObject.address, with: tokenObject.valueBigInt, and: tokenObject.decimals)
                     return tokenObject
                 }
-                realm.add(tokenObjectsWithBalance, update: true)
+                realm.add(tokenObjectsWithBalance, update: .all)
             } else {
-                realm.add(tokens, update: true)
+                realm.add(tokens, update: .all)
             }
         }
     }
@@ -172,7 +172,7 @@ class TokensDataStore {
             let tokenBalance = getBalance(for: token.address, with: balance, and: token.decimals)
             self.realm.writeAsync(obj: token) { (realm, _ ) in
                 let update = self.objectToUpdate(for: (address, balance), tokenBalance: tokenBalance)
-                realm.create(TokenObject.self, value: update, update: true)
+                realm.create(TokenObject.self, value: update, update: .all)
             }
         }
     }
@@ -200,7 +200,7 @@ class TokensDataStore {
                         "rawType": token.type.rawValue,
                         "rawCoin": token.coin.rawValue,
                     ]
-                    realm.create(TokenObject.self, value: update, update: true)
+                    realm.create(TokenObject.self, value: update, update: .all)
                 }
             }
         }
@@ -211,7 +211,7 @@ class TokensDataStore {
             return
         }
         try? realm.write {
-            realm.add(tickers, update: true)
+            realm.add(tickers, update: .all)
         }
     }
 
@@ -241,7 +241,7 @@ class TokensDataStore {
                 tempToken.balance = TokenObject.DEFAULT_BALANCE
                 return tempToken
             }
-            realm.add(defaultBalanceTokens, update: true)
+            realm.add(defaultBalanceTokens, update: .all)
         }
     }
 }

@@ -3,6 +3,7 @@
 import UIKit
 import Branch
 import RealmSwift
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
@@ -16,6 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
 
+        FirebaseApp.configure()
+        
         let sharedMigration = SharedMigrationInitializer()
         sharedMigration.perform()
         let realm = try! Realm(configuration: sharedMigration.config)

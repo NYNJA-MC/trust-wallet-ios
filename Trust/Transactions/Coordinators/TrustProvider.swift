@@ -5,7 +5,7 @@ import Foundation
 import Moya
 
 struct TrustProviderFactory {
-    static let policies: [String: ServerTrustPolicy] = [
+    static let policies: [String: ServerTrustEvaluating.Protocol] = [
         :
 //        Disabled until: https://github.com/TrustWallet/trust-wallet-ios/pull/129#issuecomment-353718512
 //        "trustwalletapp.com": .pinPublicKeys(
@@ -16,10 +16,10 @@ struct TrustProviderFactory {
     ]
 
     static func makeProvider() -> MoyaProvider<TrustAPI> {
-        let manager = Manager(
-            configuration: URLSessionConfiguration.default,
-            serverTrustPolicyManager: ServerTrustPolicyManager(policies: policies)
+        
+        let manager = ServerTrustManager(
+            evaluators: ["yourserver.com": DisabledTrustEvaluator()]
         )
-        return MoyaProvider<TrustAPI>(manager: manager)
+        return MoyaProvider<TrustAPI>()
     }
 }

@@ -69,16 +69,16 @@ final class CollectibleTokenObject: Object, Decodable {
         )
     }
 
-    required init() {
+    required override init() {
         super.init()
     }
 
     required init(value: Any, schema: RLMSchema) {
-        super.init(value: value, schema: schema)
+        //super.init(value: value, schema: schema)
     }
 
     required init(realm: RLMRealm, schema: RLMObjectSchema) {
-        super.init(realm: realm, schema: schema)
+        super.init()
     }
 
     var imageURL: URL? {
