@@ -91,3 +91,6 @@ Trust.zip
 # node
 node_modules
 JS/staging
+
+Trust/GoogleService-Info.plist
+
